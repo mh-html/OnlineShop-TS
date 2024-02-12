@@ -1,3 +1,4 @@
+import { useShoppingCart } from "../context/ShoppingCardContext"
 import { formatCurrency } from "../utils/formatCurrency"
 
 interface CardItemType {
@@ -8,7 +9,8 @@ interface CardItemType {
 }
 
 const CardItem = ({id, title, price, imgURL} : CardItemType) => {
-    const quantity : number = 0;
+    const {getItemQuantity, increaseCartQuantity ,decreaseCartQuantity , removeFromCart} = useShoppingCart()
+    const quantity = getItemQuantity(id);
 
     return (
     <div className="w-full bg-white rounded-sm overflow-hidden shadow-md">
@@ -22,15 +24,15 @@ const CardItem = ({id, title, price, imgURL} : CardItemType) => {
             </div>
             <div className="w-full my-2">
                 {quantity === 0 ? (
-                    <button className="w-full bg-blue-500 text-white rounded-sm py-2 cursor-pointer">+ Add To Card</button>
+                    <button className="w-full bg-blue-500 text-white rounded-sm py-2 cursor-pointer" onClick={() => increaseCartQuantity(id)}>+ Add To Card</button>
                 ) : (
                     <div className="text-center">
                         <div className="w-full my-1 text-xl">
-                            <button className="w-12 bg-blue-500 text-white rounded-sm py-2 cursor-pointer">+</button>
+                            <button className="w-12 bg-blue-500 text-white rounded-sm py-2 cursor-pointer" onClick={() => increaseCartQuantity(id)}>+</button>
                             <span className="mx-4">{quantity}</span>
-                            <button className="w-12 bg-blue-500 text-white rounded-sm py-2 cursor-pointer">-</button>
+                            <button className="w-12 bg-blue-500 text-white rounded-sm py-2 cursor-pointer" onClick={() => decreaseCartQuantity(id)}>-</button>
                         </div>
-                        <button className="bg-red-500 text-white rounded-sm p-1 cursor-pointer">Remove</button>
+                        <button className="bg-red-500 text-white rounded-sm p-1 cursor-pointer" onClick={() => removeFromCart(id)}>Remove</button>
                     </div>
                 )}
             </div>

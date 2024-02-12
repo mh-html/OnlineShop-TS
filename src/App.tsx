@@ -1,18 +1,19 @@
 import { Routes , Route } from "react-router-dom"
+import { ShoppingCartProvider } from "./context/ShoppingCardContext"
 import Home from "./pages/Home"
 import Store from "./pages/Store"
 import About from "./pages/About"
 import Navbar from "./components/Navbar"
 function App() {
   return (
-    <>
-    <Navbar />
-    <Routes>
-      <Route index element={<Home />} />
-      <Route path="/store" element={<Store />} />
-      <Route path="/about" element={<About />} />
-    </Routes>
-    </>
+    <ShoppingCartProvider>
+      <Navbar />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/store" element={<Store />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </ShoppingCartProvider>
   )
 }
 
