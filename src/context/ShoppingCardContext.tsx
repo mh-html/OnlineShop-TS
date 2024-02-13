@@ -4,8 +4,6 @@ type ShoppingCartProviderProps = {
     children: ReactNode
 }
 type ShoppingCartContext = {
-    openCart : () => void
-    closeCart : () => void
     getItemQuantity : (id:number) => number
     increaseCartQuantity : (id:number) => void
     decreaseCartQuantity : (id:number) => void
@@ -26,12 +24,9 @@ export function useShoppingCart() {
 
 export function ShoppingCartProvider ({children} : ShoppingCartProviderProps) {
     const [cartItem, setCartItem] = useState<cartItem[]>([])
-    const [isOpen, setIsOpen] = useState(false)
 
     const cartQuantity = cartItem.reduce((quantity, item) => item.quantity + quantity , 0)
     
-    const openCart = () => setIsOpen(true)
-    const closeCart = () => setIsOpen(false)
 
     function getItemQuantity (id:number){
         return cartItem.find(item => item.id === id)?.quantity || 0
@@ -78,9 +73,7 @@ export function ShoppingCartProvider ({children} : ShoppingCartProviderProps) {
             increaseCartQuantity,
             decreaseCartQuantity,
             removeFromCart,
-            openCart , closeCart,
             cartItem, cartQuantity,
-            isOpen,
         }}>
             {children}
         </ShoppingCartContext.Provider>

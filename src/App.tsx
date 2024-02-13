@@ -4,6 +4,8 @@ import Home from "./pages/Home"
 import Store from "./pages/Store"
 import About from "./pages/About"
 import Navbar from "./components/Navbar"
+import CartShopping from "./pages/CartShopping"
+
 function App() {
   return (
     <ShoppingCartProvider>
@@ -12,6 +14,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/store" element={<Store />} />
         <Route path="/about" element={<About />} />
+        <Route path="/shop" element={<CartShopping />} />
       </Routes>
     </ShoppingCartProvider>
   )
